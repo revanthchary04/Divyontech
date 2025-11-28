@@ -343,9 +343,24 @@
     } else {
         pgurl = pgurl.replace('#', '');
     }
+    // Map old HTML filenames to new ones for navigation highlighting
+    var filenameMap = {
+        'demo-scattered-portfolio.html': 'index.html',
+        'demo-scattered-portfolio-about.html': 'about.html',
+        'demo-scattered-portfolio-expertise.html': 'expertise.html',
+        'demo-scattered-portfolio-work.html': 'work.html',
+        'demo-scattered-portfolio-contact.html': 'contact.html',
+        'demo-scattered-portfolio-single-project-creative.html': 'project-creative.html'
+    };
+    if (filenameMap[pgurl]) {
+        pgurl = filenameMap[pgurl];
+    }
     $('.navbar-nav li a, .menu-item-list a').each(function () {
         var _this = $(this),
-                aHref = _this.attr('href');
+            aHref = _this.attr('href');
+        if (filenameMap[aHref]) {
+            aHref = filenameMap[aHref];
+        }
         if (aHref === pgurl || aHref === pgurl + '.html') {
             _this.parent().addClass('active');
             _this.parents('li.dropdown').addClass('active');
